@@ -1,7 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  window.onload = () => {
-    generateArray();
-  };
+  generateArray();
 
   const visualization = document.getElementById("visualization");
   const generatearraybtn = document.getElementById("generate-array");

@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function () {
-  generateArray();
 
   const visualization = document.getElementById("visualization");
   const generatearraybtn = document.getElementById("generate-array");
@@ -285,4 +284,5 @@ document.addEventListener("DOMContentLoaded", function () {
     sortingInprogress = false;
     resetColors();
   }
+  generateArray();
 });

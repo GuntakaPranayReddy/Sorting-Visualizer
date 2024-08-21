@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const visualization = document.getElementById("visualization");
   const generatearraybtn = document.getElementById("generate-array");
   const startsortingbtn = document.getElementById("start-sorting");
-  const finalsortedbtn = document.getElementById("final-sorted");
   const algoselect = document.getElementById("algorithm");
   const speedselect = document.getElementById("speed");
   let array = [];
@@ -16,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
   startsortingbtn.addEventListener("click", async function () {
     await startSorting();
   });
-  finalsortedbtn.addEventListener("click", finalSorting);
 
   function setbtns(disable, ...buttons) {
     for (const button of buttons) {
@@ -104,10 +102,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function finalSorting() {
-    cancelAnimationFrame(animationInterval);
-    // resetColors();
-  }
 
   // Sorting algorithms
 

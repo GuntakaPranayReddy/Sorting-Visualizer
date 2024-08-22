@@ -10,53 +10,69 @@ document.addEventListener("DOMContentLoaded", function () {
 
   generatearraybtn.addEventListener("click", generateArray);
   startsortingbtn.addEventListener("click", async function () {
-    await startSorting();
+  await startSorting();
   });
 
-  function setbtns(disable, ...buttons) {
-    for (const button of buttons) {
+  function setbtns(disable, ...buttons) 
+  {
+    for (const button of buttons) 
+    {
       button.disabled = disable;
     }
   }
 
   function generateArray() {
     array = [];
-    let size = Math.floor(Math.random() * 50 + 1);
+    let size = Math.floor(Math.random()*40+1);
     if (size < 7) {
       size = 7;
     }
-    for (let i = 0; i < size; i++) {
+    for (let i = 0; i < size; i++) 
+    {
       array.push(Math.floor(Math.random() * 100) + 1);
     }
     drawArray(array);
   }
 
-  function resetColors() {
+  function resetColors() 
+  {
     const bars = document.querySelectorAll(".bar");
     bars.forEach((bar) => {
-      bar.style.backgroundColor = "#1fbac9"; // Set the final color for all bars
+    bar.style.backgroundColor = "#1fbac9"; // Setting the final color for all bars
     });
   }
 
-  function drawArray(array, sortingRange = [], done = true) {
+  function drawArray(array, sortingRange = [], done = true) 
+  {
     visualization.innerHTML = "";
-    for (let i = 0; i < array.length; i++) {
+    for (let i = 0; i < array.length; i++) 
+    {
       const bar = document.createElement("div");
       bar.className = "bar";
-      if (array[i] <= 2) {
-        bar.style.height = array[i] * 2 + "%";
-      } else {
+      if (array[i]<=2) 
+      {
+        bar.style.height = array[i]*1.5 + "%";
+        bar.style.fontSize='1.5vh';
+        bar.style.overflow="hidden";
+      } 
+      else 
+      {
         bar.style.height = array[i] + "%";
       }
-      bar.style.width = "1.5vw";
-      bar.style.margin = "0.5vh";
+      bar.style.width = "2vw";
+      bar.style.margin = "0.07vh";
       bar.textContent = array[i];
       let color;
-      if (sortingRange.includes(i)) {
-        color = "#f39f5a"; // color for elements being swapped
-      } else if (i < sortingRange[0]) {
-        color = "#ee4cfc"; // color for elements already sorted
-      } else {
+      if (sortingRange.includes(i)) 
+      {
+        color = "red"; // color for elements being swapped
+      } 
+      else if (i < sortingRange[0]) 
+      {
+        color = "green"; // color for elements already sorted
+      } 
+      else 
+      {
         color = "#1fbac9"; // color for elements being swapped
       }
       bar.style.backgroundColor = color;
@@ -70,42 +86,53 @@ document.addEventListener("DOMContentLoaded", function () {
     const selectalgo = algoselect.value;
     const speed = getspeed();
     const swaps = [];
-    if (selectalgo === "Bubble Sort") {
+    if (selectalgo === "Bubble Sort") 
+    {
       await bubbleSort(array, speed, swaps);
-    } else if (selectalgo === "Selection Sort") {
+    } 
+    else if (selectalgo === "Selection Sort") 
+    {
       await selectionSort(array, speed, swaps);
-    } else if (selectalgo === "Insertion Sort") {
+    } 
+    else if (selectalgo === "Insertion Sort") 
+    {
       await insertionSort(array, speed, swaps);
-    } else if (selectalgo === "Merge Sort") {
+    } 
+    else if (selectalgo === "Merge Sort")
+    {
       await mergeSort(array, speed);
-    } else if (selectalgo === "Quick Sort") {
+    } 
+    else if (selectalgo === "Quick Sort") 
+    {
       await mergeSort(array, speed);
     }
     resetColors();
     setbtns(false, generatearraybtn, algoselect, speedselect);
   }
 
-  function getspeed() {
+  function getspeed() 
+  {
     const speed = speedselect.value;
-    if (speed === "Slow") {
-      // slow
-      return 2000;
-    } else if (speed === "Medium") {
-      // medium
-      return 1000;
-    } else if (speed === "Fast") {
-      // speed
-      return 500;
+    if (speed === "Slow") 
+    {
+      return 1000; // slow
+    } 
+    else if (speed === "Medium") 
+    { 
+      return 500; // medium
+    } 
+    else if (speed === "Fast") 
+    {
+      return 250; // speed
     }
   }
 
 
   // Sorting algorithms
 
-  async function bubbleSort(arr, speed, swaps) {
+  async function bubbleSort(arr, speed) {
     let n = arr.length;
     let i = 0;
-    console.log(n, i);
     let sortingInprogress = true;
     return new Promise((resolve) => {
       let animationInterval = setInterval(() => {
@@ -124,12 +151,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
         i++;
       }, speed);
-    }).then(() => {
-      console.log("Bubble Sort Over");
-    });
+    })
   }
 
-  async function selectionSort(arr, speed, swaps) {
+  async function selectionSort(arr, speed) {
     let n = arr.length;
     let i = 0;
     let sortingInprogress = true;
@@ -157,13 +182,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
         i++;
       }, speed);
-    }).then(() => {
-      console.log("Selection Sort Over");
-      resetColors();
-    });
+    })
   }
 
-  async function insertionSort(arr, speed, swaps) {
+  async function insertionSort(arr, speed) {
     let n = arr.length;
     let i = 1;
     let sortingInprogress = true;
@@ -190,10 +212,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         i++;
       }, speed);
-    }).then(() => {
-      console.log("Insertion Sort Over");
-      resetColors();
-    });
+    })
   }
 
   async function mergeSort(arr, speed) {
